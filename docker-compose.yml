@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   laravel:
-    build:
-        context: .
-        dockerfile: Dockerfile
+    image: php:8.3-fpm
     container_name: objective-laravel
     restart: unless-stopped
     working_dir: /var/www/html
@@ -26,6 +24,7 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - objetive_network
+
 networks:
   objetive_network:
     driver: bridge
