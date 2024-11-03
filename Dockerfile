@@ -16,7 +16,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY ./code .
 
-RUN composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 EXPOSE 9000
 

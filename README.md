@@ -69,6 +69,10 @@ docker exec -it <nome_do_container> /bin/bash
 
 Substitua <nome_do_container> pelo nome do contêiner que está executando a aplicação.
 
+#### Instale as dependências do projeto:
+
+composer install
+
 #### Dentro do contêiner, dê as permissões e execute o script init.sh para setar as permissões de pastas e iniciar o banco de dados limpo.
 
 chmod +x init.sh
