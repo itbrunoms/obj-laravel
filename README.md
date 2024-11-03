@@ -63,7 +63,7 @@ cd /caminho/para/o/projeto
 
 docker-compose up -d
 
-#### Acesse o contêiner em execução:
+#### Acesse o contêiner em execução do Laravel (objetive-laravel):
 
 docker exec -it <nome_do_container> /bin/bash
 
