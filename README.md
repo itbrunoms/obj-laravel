@@ -18,6 +18,10 @@ Docker Compose: Verifique se o Docker Compose está disponível.
 
 ## Como Rodar o Projeto
 
+### Crie o arquivo .env
+
+cp code/.env.example code/.env
+
 ### Opção 1: Usando PHP Artisan
 
 #### Navegue até a pasta do projeto:
@@ -27,10 +31,6 @@ cd /caminho/para/o/projeto/code
 ### Instale as dependências do projeto:
 
 composer install
-
-### Crie o arquivo .env
-
-cp .env.example .env
 
 ### Gere a chave da aplicação
 
