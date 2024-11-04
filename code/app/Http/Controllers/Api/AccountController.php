@@ -18,7 +18,7 @@ class AccountController
     public function index(Request $request, AccountRepository $accountRepository)
     {
         try {
-            $account = $accountRepository->findByAccountNumber($request->numero_conta);
+            $account = $accountRepository->findByAccountNumber($request->query('numero_conta'));
             if (!$account) throw new AccountNotFound();
 
             $accountRespose = new AccountResponse($account->toArray());

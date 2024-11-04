@@ -8,7 +8,8 @@ trait ApiResponseTrait
 {
     public function apiResponse(array|JsonResponse $data, $statusCode = 200): JsonResponse
     {
-        if($data instanceof JsonResponse) return $data;
+        if ($statusCode == 0) $statusCode = 500;
+        if ($data instanceof JsonResponse) return $data;
 
         return response()->json($data, $statusCode);
     }

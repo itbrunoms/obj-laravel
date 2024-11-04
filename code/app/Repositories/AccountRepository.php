@@ -6,7 +6,7 @@ use App\Models\Account;
 
 class AccountRepository
 {
-    public function findByAccountNumber(int $number): Account|null
+    public function findByAccountNumber($number): Account|null
     {
         $account = Account::where('account_number', $number)->first();
         return $account;

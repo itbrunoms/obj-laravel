@@ -4,33 +4,44 @@ namespace Tests;
 
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Requests\CreateAccountRequest;
+use App\Models\Account;
 use App\Repositories\AccountRepository;
 use App\Services\Account\AccountRequestService;
 
-
+use Illuminate\Http\Request;
+use function Pest\Laravel\getJson;
 
 beforeEach(function () {
     $this->accountRepository = \Mockery::mock(AccountRepository::class);
     $this->accountService = \Mockery::mock(AccountRequestService::class);
 });
 
-it('successfully creates an account and returns a response', function () {
-    $data = ['numero_conta' => '12345', 'saldo' => 1000];
-    $request = \Mockery::mock(CreateAccountRequest::class);
-    $request->shouldReceive('validated')->andReturn($data);
+
+it('account dont exists', function () {
+    $response = getJson('/conta?numero_conta=78');
+    $response->assertStatus(404);
+});
+
+it('get data account exist', function () {
+    $dataAccount = ['account_number' => rand(2, 100), 'balance' => 1000];
+
+    $account = Account::create($dataAccount);
+
+    $request = \Mockery::mock(Request::class);
+    $request->shouldReceive('query')
+        ->with('numero_conta')
+        ->andReturn($account->account_number);
 
     $this->accountRepository
         ->shouldReceive('findByAccountNumber')
-        ->with($data['numero_conta'])
-        ->andReturn(null);
+        ->with($account->account_number)
+        ->andReturn($account);
 
-    $this->accountRepository
-        ->shouldReceive('createAccount')
-        ->with($data)
-        ->andReturn(['account_number' => '12345', 'balance' => 1000]);
+    $response = app()->make(AccountController::class)->index($request, $this->accountRepository);
+    $responseData = $response->original;
 
-    $response = app()->make(AccountController::class)->store($request);
-
-    expect($response->getData())->toEqual(new AccountResponse(['numero_conta' => '12345', 'saldo' => 1000]));
+    expect($responseData['numero_conta'])->toBe($account->account_number);
+    expect($responseData['saldo'])->toBe($account->balance);
     expect($response->getStatusCode())->toBe(200);
 });
+
