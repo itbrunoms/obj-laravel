@@ -13,7 +13,7 @@ class BaseTransactionService
 
     public function getValueWithTax($value)
     {
-        $tax = $this->transactionType->getTax();
-        return $value + ($value * $tax / 100);
+        $tax = $value / 100 * $this->transactionType->getTax();
+        return $value + $tax;
     }
 }

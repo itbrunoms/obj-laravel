@@ -11,8 +11,7 @@ class CreditCardTransactionService extends BaseTransactionService implements Tra
 {
     public function process(Model $account, $value): Model
     {
-        $valueWithTax = $this->getValueWithTax($value);
-        $account->balance -= $valueWithTax;
+        $account->balance -= $value;
         $account->save();
 
         return $account;
