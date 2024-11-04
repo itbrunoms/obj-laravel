@@ -30,8 +30,9 @@ class AccountController
 
     public function store(CreateAccountRequest $request)
     {
-        $dto = AccountDto::buildFromRequest($request);
+        dd($request);
 
+        $dto = AccountDto::buildFromRequest($request);
         try {
             $account = app(AccountRequestService::class)->process($dto->toArray());
 

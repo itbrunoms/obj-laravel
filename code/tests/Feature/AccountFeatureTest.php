@@ -23,9 +23,7 @@ it('account dont exists', function () {
 });
 
 it('get data account exist', function () {
-    $dataAccount = ['account_number' => rand(2, 100), 'balance' => 1000];
-
-    $account = Account::create($dataAccount);
+    $account = Account::factory()->create();
 
     $request = \Mockery::mock(Request::class);
     $request->shouldReceive('query')
@@ -44,4 +42,26 @@ it('get data account exist', function () {
     expect($responseData['saldo'])->toBe($account->balance);
     expect($response->getStatusCode())->toBe(200);
 });
+
+//it('create account but account exists', function () {
+//    $account = Account::factory()->create();
+//
+//    $request = \Mockery::mock(CreateAccountRequest::class);
+//    $request->shouldReceive('validated')
+//        ->andReturn(['numero_conta' => $account->account_number, 'saldo' => $account->balance]);
+//
+//    $this->accountRepository
+//        ->shouldReceive('findByAccountNumber')
+//        ->with($account->account_number)
+//        ->andReturn($account);
+//
+//    $response = app()->make(AccountController::class)->store($request, $this->accountRepository);
+//    $responseData = $response->original;
+//
+//    expect($responseData['numero_conta'])->toBe($account->account_number);
+//    expect($responseData['saldo'])->toBe($account->balance);
+//    expect($response->getStatusCode())->toBe(200);
+//});
+
+
 
