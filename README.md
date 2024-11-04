@@ -5,7 +5,7 @@
 
 ## Pré-requisitos
 ### Para execução local
-PHP: Verifique se o PH**P está instalado (recomendado PHP 8.3 ou superior).**
+PHP: Verifique se o PHP está instalado (recomendado PHP 8.3 ou superior).**
 
 Composer: Certifique-se de que o Composer está instalado.
 
