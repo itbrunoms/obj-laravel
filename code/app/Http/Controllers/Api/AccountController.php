@@ -31,8 +31,10 @@ class AccountController
     public function store(CreateAccountRequest $request)
     {
         $dto = AccountDto::buildFromRequest($request);
+
         try {
             $account = app(AccountRequestService::class)->process($dto->toArray());
+
         } catch (\Exception $e) {
             return $this->apiResponse(['message' => $e->getMessage()], 400);
         }
