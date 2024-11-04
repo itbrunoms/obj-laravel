@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Transaction;
 
 use App\Enum\TransactionType;
 use App\Interfaces\TransactionInterface;
+use App\Services\Transaction\BaseTransactionService;
 use Illuminate\Database\Eloquent\Model;
 
-class CreditCardTransactionService extends BaseTransationService implements TransactionInterface
+class CreditCardTransactionService extends BaseTransactionService implements TransactionInterface
 {
-    public function __construct(public $transactionType)
-    {
-        $this->transactionType = TransactionType::CARTAO_CREDITO;
-    }
-
     public function process(Model $account, $value): Model
     {
         $valueWithTax = $this->getValueWithTax($value);
         $account->balance -= $valueWithTax;
+        $account->save();
+
+        return $account;
     }
 }
