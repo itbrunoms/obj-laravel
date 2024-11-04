@@ -11,6 +11,7 @@ class Account extends Model
 
     protected $fillable = ['account_number', 'balance'];
     protected $casts = [
+        'account_number' => 'int',
         'balance' => 'float'
     ];
     public $timestamps = false;
