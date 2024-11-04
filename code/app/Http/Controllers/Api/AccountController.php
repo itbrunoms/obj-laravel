@@ -6,6 +6,7 @@ use App\Dto\AccountDto;
 use App\Http\Controllers\Api\Traits\ApiResponseTrait;
 use App\Http\Requests\CreateAccountRequest;
 use App\Repositories\AccountRepository;
+use App\Responses\AccountResponse;
 use App\Services\AccountRequestService;
 
 class AccountController
@@ -21,6 +22,7 @@ class AccountController
             return $this->apiResponse(['message' => $e->getMessage()], 400);
         }
 
-        return $this->apiResponse($account->toArray());
+        $accountResponse = new AccountResponse($account->toArray());
+        return $this->apiResponse($accountResponse);
     }
 }
