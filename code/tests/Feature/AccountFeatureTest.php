@@ -43,7 +43,7 @@ it('getDataAccountExist', function () {
     expect($response->getStatusCode())->toBe(200);
 });
 
-it('createAccountButAccountExists', function () {
+it('createAccountWithError', function () {
     $account = Account::factory()->create();
 
     $request = \Mockery::mock(CreateAccountRequest::class);
